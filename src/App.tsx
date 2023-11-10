@@ -1,7 +1,8 @@
+import TableData from "./components/tableData";
 import "./jsons/address";
-import "./components/tableData";
+
 function App() {
-  return <tableData />;
+  return <TableData />;
 }
 
 export default App;

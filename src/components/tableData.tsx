@@ -1,4 +1,4 @@
-const tableData = () => {
+const TableData = () => {
   return (
     <table className="border-separate border border-slate-400 ...">
       <thead>
@@ -17,4 +17,4 @@ const tableData = () => {
   );
 };
 
-export default tableData;
+export default TableData;

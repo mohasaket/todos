@@ -30,7 +30,7 @@ const TableAddressData = () => {
                 className="bg-transparent hover:bg-yellow-300 text-yellow-700 p-2
               font-semibold hover:text-white py-2 px-4 border border-blue-500
                hover:border-transparent rounded"
-                onClick={(e) => handelDelete(data)}
+                onClick={() => handelDelete(data)}
               >
                 Delete
               </button>

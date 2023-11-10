@@ -1,3 +1,8 @@
+export interface IAddress {
+  id: number;
+  name: string;
+  city: string;
+}
 const address = [
   {
     id: 1,

@@ -1,4 +1,3 @@
-import ColorPicker from "./Components/ColorPicker";
 import ProfileCard from "./Components/ProfileCard";
 import AlexaImages from "./assets/images/alexa.png";
 import CortanaImages from "./assets/images/cortana.png";

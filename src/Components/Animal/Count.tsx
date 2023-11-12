@@ -1,9 +1,10 @@
 import { useState } from "react";
-import AnimalShow from "./Components/Animal/AnimalShow";
 
-function App() {
+const count = () => {
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const [countState, setCountState] = useState(0);
   const handelClick = () => {
-    //
+    setCountState(countState + 1);
   };
 
   return (
@@ -14,10 +15,9 @@ function App() {
       >
         AddAnimal
       </button>
-
-      <AnimalShow />
+      <div>Number of Animal : {countState}</div>
     </>
   );
-}
+};
 
-export default App;
+export default count;

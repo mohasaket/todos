@@ -15,6 +15,7 @@ const AnimalSvgMap = {
   dog: dog,
   gator: gator,
 };
+
 type AnimalType = keyof typeof AnimalSvgMap;
 export interface Props {
   type: AnimalType;
@@ -27,9 +28,11 @@ const AnimalShow = ({ type }: Props) => {
 
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const [clicks, setClicks] = useState(0);
+
   const handelClick = () => {
     setClicks(clicks + 1);
   };
+
   return (
     <div className="animal-show" onClick={handelClick}>
       <img className="animal" src={animalImage} alt="animalImage" />

@@ -8,21 +8,26 @@ const getRandomAnimal = () => {
 
 function App() {
   const [animals, setAnimals] = useState([""]);
+
   const handelClick = () => {
     setAnimals([...animals, getRandomAnimal()]);
   };
+
   const renderAnimals = animals.map((animal: any, index: number) => {
     return <AnimalShow type={animal} key={index} />;
   });
+
   return (
     <div className="app">
       <button
         onClick={handelClick}
-        className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
+        className="bg-transparent hover:bg-blue-500
+         text-blue-700 font-semibold hover:text-white py-2 px-4
+          border border-blue-500 hover:border-transparent 
+          rounded"
       >
         AddAnimal
       </button>
-
       <div className="animal-list">{renderAnimals}</div>
     </div>
   );

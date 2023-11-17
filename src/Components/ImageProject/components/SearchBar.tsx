@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { ChangeEvent, FormEvent, useState } from "react";
 
 interface Props {
   onSubmit: (term: string) => void;
@@ -6,11 +6,11 @@ interface Props {
 const SearchBar = ({ onSubmit }: Props) => {
   const [term, setTerm] = useState("");
 
-  const handelChange = (event: any) => {
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     setTerm(event.target.value);
   };
 
-  const handelFormSubmit = (event: any) => {
+  const handleFormSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     onSubmit(term);
   };
@@ -23,7 +23,7 @@ const SearchBar = ({ onSubmit }: Props) => {
       <form
         className="bg-white shadow-md 
         rounded px-8 pt-6 pb-8 mb-4"
-        onSubmit={handelFormSubmit}
+        onSubmit={handleFormSubmit}
       >
         <h1>search you lovely images</h1>
         <input
@@ -32,7 +32,7 @@ const SearchBar = ({ onSubmit }: Props) => {
            leading-tight focus:outline-none
             focus:shadow-outline"
           value={term}
-          onChange={handelChange}
+          onChange={handleChange}
         />
       </form>
     </div>

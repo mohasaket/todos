@@ -1,19 +1,22 @@
 import { useState } from "react";
-import searchImages from "./Components/ImageProject/Api/api";
-import ImageList from "./Components/ImageProject/components/ImageList";
-import SearchBar from "./Components/ImageProject/components/SearchBar";
-
+import BookCreate from "./Components/books/BookCreate";
+import "./appBook.css";
+interface Book {
+  id: number;
+  title: string;
+}
 function App() {
-  const [images, setImages] = useState([]);
-  const handelSubmit = async (term: string) => {
-    const result = await searchImages(term);
-    setImages(result);
+  const [books, setBooks] = useState<Book[]>([]);
+
+  const createBook = (title: string) => {
+    const updateBooks = [...books, { id: 123, title: title }];
+    setBooks(updateBooks);
   };
 
   return (
     <>
-      <SearchBar onSubmit={handelSubmit} />
-      <ImageList images={images} />
+      {books.length}
+      <BookCreate onCreate={createBook} />
     </>
   );
 }

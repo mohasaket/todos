@@ -29,12 +29,12 @@ const AnimalShow = ({ type }: Props) => {
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const [clicks, setClicks] = useState(0);
 
-  const handelClick = () => {
+  const handleClick = () => {
     setClicks(clicks + 1);
   };
 
   return (
-    <div className="animal-show" onClick={handelClick}>
+    <div className="animal-show" onClick={handleClick}>
       <img className="animal" src={animalImage} alt="animalImage" />
       <img
         className="heart"

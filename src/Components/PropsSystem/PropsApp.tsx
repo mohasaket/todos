@@ -35,13 +35,13 @@ const PropsApp = () => {
       </div>
 
       <div className="flex w-full justify-between px-2">
-        <ProfileCard title="alexa" handel="@alexa" imageSrc={AlexaImages} />
+        <ProfileCard title="alexa" handle="@alexa" imageSrc={AlexaImages} />
         <ProfileCard
           title={"coratana"}
-          handel={"@cortana"}
+          handle={"@cortana"}
           imageSrc={CortanaImages}
         />
-        <ProfileCard title={"siri"} handel={"@siri"} imageSrc={SiriImages} />
+        <ProfileCard title={"siri"} handle={"@siri"} imageSrc={SiriImages} />
       </div>
       {/* <ColorPicker color={"red"} />
     <ColorPicker color={"blue"} />

@@ -1,7 +1,13 @@
 import React from "react";
 import ImageShow from "./ImageShow";
 interface Props {
-  images: any[];
+  images: {
+    id: string;
+    urls: {
+      small: string;
+    };
+    alt_description: string;
+  }[];
 }
 
 const ImageList = ({ images }: Props) => {

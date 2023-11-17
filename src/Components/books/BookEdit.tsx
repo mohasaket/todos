@@ -4,10 +4,9 @@ interface Props {
     id: number;
     title: string;
   };
-  onEdit: (id: number, title: string) => void;
-  onSubmit: () => void;
+  onSubmit: (id: number, title: string) => void;
 }
-const BookEdit = ({ book, onEdit, onSubmit }: Props) => {
+const BookEdit = ({ book, onSubmit }: Props) => {
   const [title, setTitle] = useState(book.title);
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -16,8 +15,7 @@ const BookEdit = ({ book, onEdit, onSubmit }: Props) => {
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    onEdit(book.id, title);
-    onSubmit();
+    onSubmit(book.id, title);
   };
 
   return (

@@ -19,18 +19,20 @@ const BookShow = ({ book, onDelete, onEdit }: Props) => {
   const handleEditClick = () => {
     setShowEdit(!showEdit);
   };
-  const handleSubmit = () => {
+  const handleSubmit = (id: number, newTitle: string) => {
     setShowEdit(false);
+    onEdit(id, newTitle);
   };
 
   let content = <h3> {book.title}</h3>;
 
   if (showEdit) {
-    content = <BookEdit onSubmit={handleSubmit} book={book} onEdit={onEdit} />;
+    content = <BookEdit onSubmit={handleSubmit} book={book} />;
   }
 
   return (
     <div className="book-show">
+      <img src={`https://picsum.photos/seed/${book.id}/200/300`} alt="books" />
       <div>{content}</div>
       <div className="actions">
         <button className="delete" onClick={handleDeleteClick}>

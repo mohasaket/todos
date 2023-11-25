@@ -15,9 +15,6 @@ const SearchBar = ({ onSubmit }: Props) => {
     onSubmit(term);
   };
 
-  // const handleClick = () => {
-  //   onSubmit("cars");
-  // };
   return (
     <div>
       <form

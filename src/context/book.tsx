@@ -9,47 +9,50 @@ interface ProviderProps {
 }
 interface BooksContextProps {
     books: Book[];
-    count?: number;
-    incrementCount?: () => void;
-    deleteBookByID: (id: number) => Promise<void>;
+    deleteBookById: (id: number) => Promise<void>;
     editBookById: (id: number, newTitle: string) => Promise<void>;
     createBook: (title: string) => Promise<void>;
     fetchBooks: () => Promise<void>;
 }
+const BooksContext = createContext<BooksContextProps>(
+    {
+        books: [],
+        deleteBookById: async () => { },
+        editBookById: async () => { },
+        createBook: async () => { },
+        fetchBooks: async () => { }
+    });
 
-const BooksContext = createContext<BooksContextProps>({
-    books: [],
-    deleteBookByID: async () => { },
-    editBookById: async () => { },
-    createBook: async () => { },
-    fetchBooks: async () => { },
-});
 
 function Provider({ children }: ProviderProps) {
     const [books, setBooks] = useState<Book[]>([]);
 
     const fetchBooks = async () => {
-        const response = await axios.get(' http://localhost:3001/books');
-        setBooks(response.data)
-    }
+        const response = await axios.get('http://localhost:3001/books');
+
+        setBooks(response.data);
+    };
 
     const editBookById = async (id: number, newTitle: string) => {
-        const response = await axios.put(` http://localhost:3001/books/${id}`, {
+        const response = await axios.put(`http://localhost:3001/books/${id}`, {
             title: newTitle,
-        })
+        });
 
-        const updatesBooks = books.map((book) => {
+        const updatedBooks = books.map((book) => {
             if (book.id === id) {
                 return { ...book, ...response.data };
             }
+
             return book;
         });
-        setBooks(updatesBooks);
+
+        setBooks(updatedBooks);
     };
 
-    const deleteBookByID = async (id: number) => {
-        await axios.put(` http://localhost:3001/books/${id}`)
-        const updatedBooks = books.filter((book) => {
+    const deleteBookById = async (id: number) => {
+        await axios.delete(`http://localhost:3001/books/${id}`);
+
+        const updatedBooks = books.filter((book: Book) => {
             return book.id !== id;
         });
 
@@ -57,26 +60,24 @@ function Provider({ children }: ProviderProps) {
     };
 
     const createBook = async (title: string) => {
-
-        const response = await axios.post(' http://localhost:3001/books', {
+        const response = await axios.post('http://localhost:3001/books', {
             title,
-        })
-        const updateBooks = [
-            ...books,
-            response.data
-        ];
-        setBooks(updateBooks);
+        });
+
+        const updatedBooks = [...books, response.data];
+        setBooks(updatedBooks);
     };
 
-    const booksContextValue: BooksContextProps = {
-        books: [],
-        deleteBookByID,
+    const valueToShare = {
+        books,
+        deleteBookById,
         editBookById,
         createBook,
-        fetchBooks
+        fetchBooks,
     };
+
     return (
-        <BooksContext.Provider value={booksContextValue}>
+        <BooksContext.Provider value={valueToShare}>
             {children}
         </BooksContext.Provider>
     );

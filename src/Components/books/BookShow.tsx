@@ -12,10 +12,10 @@ interface Props {
 
 const BookShow = ({ book }: Props) => {
   const [showEdit, setShowEdit] = useState(false);
-  const { deleteBookByID } = useBooksContext();
+  const { deleteBookById } = useBooksContext();
 
   const handleDeleteClick = () => {
-    deleteBookByID(book.id);
+    deleteBookById(book.id);
   };
 
   const handleEditClick = () => {

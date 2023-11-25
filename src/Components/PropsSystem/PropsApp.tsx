@@ -1,4 +1,4 @@
-import React from "react";
+
 import ProfileCard from "./ProfileCard";
 import AlexaImages from "../../assets/images/alexa.png";
 import CortanaImages from "../../assets/images/cortana.png";

@@ -8,11 +8,22 @@ interface ProviderProps {
     children: ReactNode;
 }
 interface BooksContextProps {
+    books: Book[];
     count?: number;
-    incrementCount?: () => void
+    incrementCount?: () => void;
+    deleteBookByID: (id: number) => Promise<void>;
+    editBookById: (id: number, newTitle: string) => Promise<void>;
+    createBook: (title: string) => Promise<void>;
+    fetchBooks: () => Promise<void>;
 }
 
-const BooksContext = createContext<BooksContextProps>({});
+const BooksContext = createContext<BooksContextProps>({
+    books: [],
+    deleteBookByID: async () => { },
+    editBookById: async () => { },
+    createBook: async () => { },
+    fetchBooks: async () => { },
+});
 
 function Provider({ children }: ProviderProps) {
     const [books, setBooks] = useState<Book[]>([]);
@@ -21,14 +32,6 @@ function Provider({ children }: ProviderProps) {
         const response = await axios.get(' http://localhost:3001/books');
         setBooks(response.data)
     }
-    const deleteBookByID = async (id: number) => {
-        await axios.put(` http://localhost:3001/books/${id}`)
-        const updatedBooks = books.filter((book) => {
-            return book.id !== id;
-        });
-
-        setBooks(updatedBooks);
-    };
 
     const editBookById = async (id: number, newTitle: string) => {
         const response = await axios.put(` http://localhost:3001/books/${id}`, {
@@ -42,7 +45,15 @@ function Provider({ children }: ProviderProps) {
             return book;
         });
         setBooks(updatesBooks);
+    };
 
+    const deleteBookByID = async (id: number) => {
+        await axios.put(` http://localhost:3001/books/${id}`)
+        const updatedBooks = books.filter((book) => {
+            return book.id !== id;
+        });
+
+        setBooks(updatedBooks);
     };
 
     const createBook = async (title: string) => {
@@ -56,15 +67,16 @@ function Provider({ children }: ProviderProps) {
         ];
         setBooks(updateBooks);
     };
-    const valueToShare = {
-        books,
+
+    const booksContextValue: BooksContextProps = {
+        books: [],
         deleteBookByID,
         editBookById,
         createBook,
         fetchBooks
-    }
+    };
     return (
-        <BooksContext.Provider value={valueToShare}>
+        <BooksContext.Provider value={booksContextValue}>
             {children}
         </BooksContext.Provider>
     );

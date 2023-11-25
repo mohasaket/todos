@@ -1,17 +1,16 @@
-import React, { ChangeEvent, FormEvent, useState } from "react";
-interface Props {
-  onCreate: (title: string) => void;
-}
-const BookCreate = ({ onCreate }: Props) => {
-  const [title, setTitle] = useState("");
+import { ChangeEvent, FormEvent, useState } from "react";
+import useBooksContext from "../../hooks/use-books-context";
 
+const BookCreate = () => {
+  const [title, setTitle] = useState("");
+  const { createBook } = useBooksContext();
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     setTitle(event.target.value);
   };
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    onCreate(title);
+    createBook(title);
     setTitle("");
   };
 

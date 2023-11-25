@@ -1,27 +1,30 @@
 import { useState } from "react";
 import BookEdit from "./BookEdit";
+import useBooksContext from "../../hooks/use-books-context";
 
 interface Props {
   book: {
     id: number;
     title: string;
   };
-  onDelete: (id: number) => void;
-  onEdit: (id: number, title: string) => void;
+
 }
-const BookShow = ({ book, onDelete, onEdit }: Props) => {
+
+const BookShow = ({ book }: Props) => {
   const [showEdit, setShowEdit] = useState(false);
+  const { deleteBookByID } = useBooksContext();
 
   const handleDeleteClick = () => {
-    onDelete(book.id);
+    deleteBookByID(book.id);
   };
 
   const handleEditClick = () => {
     setShowEdit(!showEdit);
   };
-  const handleSubmit = (id: number, newTitle: string) => {
+
+  const handleSubmit = () => {
     setShowEdit(false);
-    onEdit(id, newTitle);
+
   };
 
   let content = <h3> {book.title}</h3>;

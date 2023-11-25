@@ -1,25 +1,23 @@
-import { useContext } from "react";
+import useBooksContext from "../../hooks/use-books-context";
 import BookShow from "./BookShow";
-import BooksContext from "../../context/book";
 interface Props {
   books: {
     id: number;
     title: string;
   }[];
-  onDelete: (id: number) => void;
-  onEdit: (id: number, title: string) => void;
+
 }
 
-const BookList = ({ books, onDelete, onEdit }: Props) => {
+const BookList = () => {
+
+  const { books } = useBooksContext();
 
   const renderdBooks = books.map((book) => {
     return (
-      <BookShow onDelete={onDelete} onEdit={onEdit} key={book.id} book={book} />
+      <BookShow key={book.id} book={book} />
     );
   });
-  return <div className="book-list">
-    {renderdBooks}
-  </div>;
+  return <div className="book-list">{renderdBooks}</div>;
 };
 
 export default BookList;
